@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
-
 # import json
 
 
 def generate_diff(file_path1=None, file_path2=None):
-    print('here')
+    print('here!s')
+
+
     # file1_data = json.load(open(file_path1), object_hook=dict)
     # file2_data = json.load(open(file_path2), object_hook=dict)
     # return get_diff(file1_data, file2_data)
