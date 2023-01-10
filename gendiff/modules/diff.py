@@ -1,5 +1,4 @@
 import json
-import os
 
 
 def get_diff(data1, data2):
@@ -55,12 +54,8 @@ def get_diff(data1, data2):
 
 
 def generate_diff(file_path1, file_path2):
-    # print('here')
     # print(os.getcwd())
-    # print(file_path1)
-    fulldir1 = os.path.join(os.getcwd(), 'gendiff', 're', file_path1)
-    fulldir2 = os.path.join(os.getcwd(), 'gendiff', 're', file_path2)
-    file1_data = json.load(open(fulldir1, 'r'), object_hook=dict)
-    file2_data = json.load(open(fulldir2), object_hook=dict)
+    file1_data = json.load(open(file_path1, 'r'), object_hook=dict)
+    file2_data = json.load(open(file_path2), object_hook=dict)
     return get_diff(file1_data, file2_data)
     
