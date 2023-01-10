@@ -1,5 +1,6 @@
 import json
-
+from .parser import parse_files
+import os
 
 def get_diff(data1, data2):
     # print(data1)
@@ -53,9 +54,7 @@ def get_diff(data1, data2):
 
 
 
-def generate_diff(file_path1, file_path2):
-    # print(os.getcwd())
-    file1_data = json.load(open(file_path1, 'r'), object_hook=dict)
-    file2_data = json.load(open(file_path2), object_hook=dict)
+def generate_diff(file_path1, file_path2, format):
+    [file1_data, file2_data] = parse_files(file_path1, file_path2, format)
     return get_diff(file1_data, file2_data)
     
