@@ -3,18 +3,18 @@ import os
 
 
 def get_diff(data1, data2):
-    print(data1)
-    print(data2)
+    # print(data1)
+    # print(data2)
     set1 = set(data1.keys())
     set2 = set(data2.keys())
-    print(set1)
-    print(set2)
+    # print(set1)
+    # print(set2)
     minus = set1 - set2
     plus = set2 - set1
     per = set1 & set2
-    print(minus)
-    print(plus)
-    print(per)
+    # print(minus)
+    # print(plus)
+    # print(per)
     d = {}
     # print(type(d))
     for el in minus:
@@ -40,7 +40,12 @@ def get_diff(data1, data2):
     
     sortedKeys = list(d.keys())
     sortedKeys.sort(key=f)
-    print(sortedKeys)
+    # print(sortedKeys)
+    result = {}
+    for el in sortedKeys:
+        result[el] = d[el]
+    # print(json.dumps(result))
+    return json.dumps(result)
 
     # list(d.keys()).sort(key=f)
     
