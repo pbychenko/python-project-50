@@ -25,7 +25,7 @@ def get_diff(data1, data2):
     
     for el in per:
         if (data1[el] == data2[el]):
-            d[el] = data1[el]
+            d[f'  {el}'] = data1[el]
         else:
             d[f'- {el}'] = data1[el]
             d[f'+ {el}'] = data2[el]
@@ -33,9 +33,9 @@ def get_diff(data1, data2):
 
     # print(d)
     def f(e):
-        if e[0] == '-' or e[0] == '+':
-            return e[2:]
-        return e
+        # if e[0] == '-' or e[0] == '+':
+        #     return e[2:]
+        return e[2:]
     
     
     sortedKeys = list(d.keys())
@@ -44,8 +44,12 @@ def get_diff(data1, data2):
     result = {}
     for el in sortedKeys:
         result[el] = d[el]
-    # print(json.dumps(result))
-    return json.dumps(result)
+    # print(type(json.dumps(result, indent = 2)))
+    # print(json.dumps(result, indent = 2).replace('"', ''))
+    # return json.dumps(result)
+    formatter_result = json.dumps(result, indent = 2).replace('"', '').replace(',', '')
+    # print('formatter_result',formatter_result)
+    return formatter_result
 
     # list(d.keys()).sort(key=f)
     
@@ -54,7 +58,7 @@ def get_diff(data1, data2):
 
 
 
-def generate_diff(file_path1, file_path2, format):
-    [file1_data, file2_data] = parse_files(file_path1, file_path2, format)
+def generate_diff(file_path1, file_path2):
+    [file1_data, file2_data] = parse_files(file_path1, file_path2)
     return get_diff(file1_data, file2_data)
     
