@@ -1,6 +1,7 @@
-import json
+# import json
 from .parser import parse_files
-import os
+from .formatter import format_data
+# import os
 
 def get_diff(data1, data2):
     # print(data1)
@@ -47,15 +48,9 @@ def get_diff(data1, data2):
     # print(type(json.dumps(result, indent = 2)))
     # print(json.dumps(result, indent = 2).replace('"', ''))
     # return json.dumps(result)
-    formatter_result = json.dumps(result, indent = 2).replace('"', '').replace(',', '')
-    # print('formatter_result',formatter_result)
-    return formatter_result
-
-    # list(d.keys()).sort(key=f)
-    
-
-    # print(d)
-
+    # formatter_result = json.dumps(result, indent = 2).replace('"', '').replace(',', '')
+    # return formatter_result
+    return format_data(result, 'simple')
 
 
 def generate_diff(file_path1, file_path2):
