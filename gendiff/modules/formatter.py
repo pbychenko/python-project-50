@@ -4,7 +4,7 @@ import os
 
 
 def format_data(data, format):
-    if format == 'simple':
+    if format == 'stylish':
         return json.dumps(data, indent = 2).replace('"', '').replace(',', '')
 
     # if file_extension == '.yaml' or file_extension == '.yml':
