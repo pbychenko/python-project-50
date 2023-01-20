@@ -13,9 +13,23 @@ import os
     
     # return [file1_data, file2_data]
 def stylish(data):
+    # print(data)
     
+    def getElement(el):
+        if (el['state'] == 'nested'):
+            return f" {el['key']}: {stylish(el['children'])}"
+        if (el['state'] == 'added'):
+            return f"+ {el['key']}: {el['value']}\n"
+        if (el['state'] == 'removed'):
+            return f"- {el['key']}: {el['value']}\n"
+        if (el['state'] == 'equal'):
+            return f"  {el['key']}: {el['value']}\n"
+        if (el['state'] == 'changed'):
+            return f"- {el['key']}: {el['value']}\n+ {el['key']}: {el['new_value']}\n"
     
+    result = ''.join(list(map(getElement, data)))   
 
-
-    return data
+    # result = json.dumps(data, indent = 2).replace('"', '').replace(',', '')
+    # print(result)
+    return result
     

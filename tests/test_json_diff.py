@@ -26,6 +26,8 @@ def test_big_json():
     result_data = open(result_path, 'r').read()
 
     # print(generate_diff(file1_path, file2_path))
+    print('heres', generate_diff(file1_path, file2_path))
+    print(f"tee\nddd")
 
     assert generate_diff(file1_path, file2_path) == result_data
 
