@@ -46,7 +46,9 @@ from .formatters import stylish
 def generate_diff(file_path1, file_path2, type = 'stylish'):
     file1_data = parse_file(file_path1)
     file2_data = parse_file(file_path2)
+    
     ast = get_ast(file1_data, file2_data)
+    # print(ast)
     if type == 'stylish':
         return stylish(ast)
 
