@@ -1,5 +1,6 @@
 from .parser import parse_file
 from .formatters.stylish import stylish
+from .formatters.plain import plain
 
 def generate_diff(file_path1, file_path2, type = 'stylish'):
     file1_data = parse_file(file_path1)
@@ -9,6 +10,8 @@ def generate_diff(file_path1, file_path2, type = 'stylish'):
     # print(ast)
     if type == 'stylish':
         return stylish(ast)
+    # if type == 'plain':
+    #     return plain(ast)
 
 def get_ast(data1, data2):    
     set1 = set(data1.keys())
