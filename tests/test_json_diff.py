@@ -47,3 +47,12 @@ def test_big_json_json():
 
     assert generate_diff(file1_path, file2_path, 'json') == result_data
 
+def test_big_yml_stylish():
+    print(os.getcwd())
+    file1_path = os.path.join(os.getcwd(), 'tests', 'fixtures', 'yaml', 'file11.yml')
+    file2_path = os.path.join(os.getcwd(), 'tests', 'fixtures', 'yaml', 'file21.yml')
+    result_path = os.path.join(os.getcwd(), 'tests', 'fixtures', 'results', 'result_stylish.txt')
+    result_data = open(result_path, 'r').read()
+
+    assert generate_diff(file1_path, file2_path) == result_data
+

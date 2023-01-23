@@ -6,12 +6,15 @@ from .formatters.json import format_to_json
 def generate_diff(file_path1, file_path2, type = 'stylish'):
     file1_data = parse_file(file_path1)
     file2_data = parse_file(file_path2)
+
+    print('file1_data', file1_data)
+    print('file2_data', file2_data)
     
     ast = get_ast(file1_data, file2_data)
     # print('tt',f'{isinstance(ast, list)}')
     # l = [1,2,3]
     # print(type(l))
-    if type == 'stylish':
+    if type == 'stylish' or type == None:
         return stylish(ast)
 
     if type == 'plain':
