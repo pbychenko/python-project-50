@@ -1,31 +1,30 @@
-def formatElement(el, indent_count):
-    indents = ' '*indent_count
-    if not isinstance(el, dict):
-        return el
-    result = []
-
-    for k, v in el.items():
-        result.append(f'  {indents}{k}: {formatElement(v, indent_count + 4)}')
-    result_str = '\n'.join(result)
-
-    return '{\n' + f'{result_str}' + f"\n{' '*(indent_count - 2)}" + '}'
+def formatElement(el):
+    if isinstance(el, dict):
+        return '[complex value]'
     
-def plain(data, indent_count = 2 ):
-    indents = ' '*indent_count
+    if isinstance(el, str):
+        return f"'{el}'"
     
+    return el
+    
+def plain(data, prev_keys = []):    
     def getElement(el):
-        if (el['state'] == 'nested'):
-            return f"{indents}  {el['key']}: {stylish(el['children'], indent_count + 4)}"
+        new_keys = prev_keys[:]
+        new_keys.append(el['key'])
+
+        if (el['state'] == 'nested'):            
+            return plain(el['children'], new_keys)
         
         if (el['state'] == 'added'):
-            return f"{indents}+ {el['key']}: {formatElement(el['value'], indent_count + 4)}"
+            return f"Property '{'.'.join(new_keys)}' was added with value: {formatElement(el['value'])}"
         if (el['state'] == 'removed'):
-            return f"{indents}- {el['key']}: {formatElement(el['value'], indent_count + 4)}"
+            return f"Property '{'.'.join(new_keys)}' was removed"
         if (el['state'] == 'equal'):
-            return f"{indents}  {el['key']}: {formatElement(el['value'], indent_count + 4)}"
+            return ''
         if (el['state'] == 'changed'):
-            return f"{indents}- {el['key']}: {formatElement(el['value'], indent_count + 4)}\n{indents}+ {el['key']}: {formatElement(el['new_value'], indent_count + 4)}"
+            return f"Property '{'.'.join(new_keys)}' was updated. From {formatElement(el['value'])} to {formatElement(el['new_value'])}"
     
-    result = ('{\n' + '\n'.join(list(map(getElement, data))) + f"\n{' '*(indent_count - 2)}" + '}').replace('None', 'null').replace('True', 'true').replace('False', 'false')
+    filtered = filter(lambda el: el != '', map(getElement, data))
+    result = '\n'.join(list(filtered)).replace('None', 'null').replace('True', 'true').replace('False', 'false')
     return result
     
