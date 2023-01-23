@@ -9,6 +9,9 @@ def parse_file(file_path):
         file_data = json.load(open(file_path, 'r'), object_hook=dict)
 
     if file_extension == '.yaml' or file_extension == '.yml':
+        print('here')
+        f = open(file_path, 'r')
+        print('print(f.read())', f.read())
         file_data = yaml.load(open(file_path, 'r'), Loader=yaml.FullLoader)
     return file_data
     
