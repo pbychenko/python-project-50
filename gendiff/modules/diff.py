@@ -1,17 +1,24 @@
 from .parser import parse_file
 from .formatters.stylish import stylish
 from .formatters.plain import plain
+from .formatters.json import format_to_json
 
 def generate_diff(file_path1, file_path2, type = 'stylish'):
     file1_data = parse_file(file_path1)
     file2_data = parse_file(file_path2)
     
     ast = get_ast(file1_data, file2_data)
-    # print(ast)
+    # print('tt',f'{isinstance(ast, list)}')
+    # l = [1,2,3]
+    # print(type(l))
     if type == 'stylish':
         return stylish(ast)
+
     if type == 'plain':
         return plain(ast)
+    
+    if type == 'json':
+        return format_to_json(ast)
 
 def get_ast(data1, data2):    
     set1 = set(data1.keys())
