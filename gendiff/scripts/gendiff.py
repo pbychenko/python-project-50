@@ -15,7 +15,7 @@ def main():
 
     args = parser.parse_args()
 
-    print(args.first_file)
+    # print(args.first_file)
     # print(args.second_file)
     # p1 = os.path.join(os.getcwd(), args.first_file)
     # p2 = os.path.join(os.getcwd(), args.second_file)
