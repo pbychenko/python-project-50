@@ -7,11 +7,11 @@ def generate_diff(file_path1, file_path2, type = 'stylish'):
     file1_data = parse_file(file_path1)
     file2_data = parse_file(file_path2)
 
-    print('file_path1', file_path1)
-    print('file_path2', file_path2)
-    print('file1_data', file1_data)
-    print('file2_data', file2_data)
-    print('type', type)
+    # print('file_path1', file_path1)
+    # print('file_path2', file_path2)
+    # print('file1_data', file1_data)
+    # print('file2_data', file2_data)
+    # print('type', type)
     
     ast = get_ast(file1_data, file2_data)
     # print('tt',f'{isinstance(ast, list)}')
