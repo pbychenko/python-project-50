@@ -1,20 +1,21 @@
 def formatElement(el):
     if isinstance(el, dict):
         return '[complex value]'
-    
+
     if isinstance(el, str):
         return f"'{el}'"
-    
+
     return el
-    
-def plain(data, prev_keys = []):    
+
+
+def plain(data, prev_keys=[]):
     def getElement(el):
         new_keys = prev_keys[:]
         new_keys.append(el['key'])
 
-        if (el['state'] == 'nested'):            
+        if (el['state'] == 'nested'):
             return plain(el['children'], new_keys)
-        
+
         if (el['state'] == 'added'):
             return f"Property '{'.'.join(new_keys)}' was added with value: {formatElement(el['value'])}"
         if (el['state'] == 'removed'):
@@ -23,8 +24,7 @@ def plain(data, prev_keys = []):
             return ''
         if (el['state'] == 'changed'):
             return f"Property '{'.'.join(new_keys)}' was updated. From {formatElement(el['value'])} to {formatElement(el['new_value'])}"
-    
+
     filtered = filter(lambda el: el != '', map(getElement, data))
     result = '\n'.join(list(filtered)).replace('None', 'null').replace('True', 'true').replace('False', 'false')
     return result
-    
