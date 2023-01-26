@@ -6,9 +6,10 @@ import os
 def parse_file(file_path):
     _, file_extension = os.path.splitext(file_path)
 
-    if file_extension == '.json':
-        file_data = json.load(open(file_path, 'r'), object_hook=dict)
+    map = {
+        '.json': lambda path: json.load(open(path, 'r'), object_hook=dict),
+        '.yaml': lambda path: yaml.load(open(path, 'r'), Loader=yaml.FullLoader),
+        '.yml': lambda path: yaml.load(open(path, 'r'), Loader=yaml.FullLoader)
+    }
 
-    if file_extension == '.yaml' or file_extension == '.yml':
-        file_data = yaml.load(open(file_path, 'r'), Loader=yaml.FullLoader)
-    return file_data
+    return map[file_extension](file_path)
