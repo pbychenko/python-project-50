@@ -10,6 +10,8 @@ def formatElement(el):
 
     if isinstance(el, str):
         return f"'{el}'"
+    
+    return el
 
 
 def plain(data, prev_keys=[]):
