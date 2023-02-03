@@ -10,7 +10,7 @@ def formatElement(el):
 
     if isinstance(el, str):
         return f"'{el}'"
-    
+
     return el
 
 
