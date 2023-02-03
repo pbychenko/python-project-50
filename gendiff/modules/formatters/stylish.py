@@ -1,9 +1,15 @@
 def formatElement(el, indent_count):
-    indents = ' ' * indent_count
+    if isinstance(el, bool):
+        return str(el).lower()
+
+    if el is None:
+        return 'null'
+
     if not isinstance(el, dict):
         return el
 
     result = []
+    indents = ' ' * indent_count
 
     for k, v in el.items():
         result.append(f'  {indents}{k}: {formatElement(v, indent_count + 4)}')
@@ -28,5 +34,5 @@ def stylish(data, indent_count=2):
         if (el['state'] == 'changed'):
             return f"{indents}- {el['key']}: {formatElement(el['value'], indent_count + 4)}\n{indents}+ {el['key']}: {formatElement(el['new_value'], indent_count + 4)}"
 
-    result = ('{\n' + '\n'.join(list(map(get_element, data))) + f"\n{' '*(indent_count - 2)}" + '}').replace('None', 'null').replace('True', 'true').replace('False', 'false')
+    result = ('{\n' + '\n'.join(list(map(get_element, data))) + f"\n{' '*(indent_count - 2)}" + '}')
     return result
