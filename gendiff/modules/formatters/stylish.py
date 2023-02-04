@@ -34,5 +34,5 @@ def stylish(data, indent_count=2):
         if (el['state'] == 'changed'):
             return f"{indents}- {el['key']}: {formatElement(el['value'], indent_count + 4)}\n{indents}+ {el['key']}: {formatElement(el['new_value'], indent_count + 4)}"
 
-    result = ('{\n' + '\n'.join(list(map(get_element, data))) + f"\n{' '*(indent_count - 2)}" + '}')
+    result = '{\n' + '\n'.join(list(map(get_element, data))) + f"\n{' '*(indent_count - 2)}" + '}'
     return result

@@ -7,7 +7,7 @@ def generate_diff(file_path1, file_path2, type='stylish'):
     file2_data = parse_file(file_path2)
 
     ast = get_ast(file1_data, file2_data)
-    return format(type)(ast)
+    return format(ast, type)
 
 
 def get_ast(data1, data2):
