@@ -73,13 +73,13 @@ def formatElement(el, depth):
 
 def stylish(data, depth=1):
     indents = indent_template * depth
-
+    step_distant = indent_step * (depth - 1)
 
     def get_element(el):
         if (el['state'] == 'nested'):
-            return f"{indents}  {el['key']}: {stylish(el['children'], depth + indent_step)}"
+            return f"{indents}  {el['key']}: {stylish(el['children'], depth + 1)}"
         
-        value = formatElement(el['value'], depth)
+        value = formatElement(el['value'], depth + 1)
 
         if (el['state'] == 'added'):
             return f"{indents}+ {el['key']}: {value}"
@@ -91,8 +91,7 @@ def stylish(data, depth=1):
             return f"{indents}  {el['key']}: {value}"
 
         if (el['state'] == 'changed'):
-            return f"{indents}- {el['key']}: {value}\n{indents}+ {el['key']}: {formatElement(el['new_value'], depth)}"    
-
+            return f"{indents}- {el['key']}: {value}\n{indents}+ {el['key']}: {formatElement(el['new_value'], depth + 1)}"
 
     
     result = '{\n' + '\n'.join(list(map(get_element, data))) + f"\n{indent_template * (depth - 1)}" + '}'
