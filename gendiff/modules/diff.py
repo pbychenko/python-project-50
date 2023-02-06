@@ -7,15 +7,11 @@ def generate_diff(file_path1, file_path2, type='stylish'):
     file2_data = parse_file(file_path2)
 
     ast = get_ast(file1_data, file2_data)
-    print('ast', ast)
     return format(ast, type)
 
 
 def get_ast(data1, data2):
-    set1 = set(data1.keys())
-    set2 = set(data2.keys())
-
-    all_keys = list(set1 | set2)
+    all_keys = list(data1.keys() | data2.keys())
     all_keys.sort()
 
     def get_ast_element(key):
